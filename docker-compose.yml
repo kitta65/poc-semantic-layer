@@ -5,7 +5,11 @@ services:
     ports:
       - 4000:4000
       - 15432:15432
+    user: "${UID}:${GID}"
     environment:
+      - CUBEJS_DB_TYPE=bigquery
       - CUBEJS_DEV_MODE=true
+      - CUBEJS_DB_BQ_PROJECT_ID=${CUBEJS_DB_BQ_PROJECT_ID}
+      - CUBEJS_DB_BQ_CREDENTIALS=${CUBEJS_DB_BQ_CREDENTIALS}
     volumes:
       - ./cube:/cube/conf

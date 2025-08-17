@@ -1,3 +1,4 @@
-.cubestore
 .env
-cube/package.json
+
+cube/*
+!cube/model
