@@ -1,7 +1,7 @@
 services:
   # https://cube.dev/docs/product/getting-started/core/create-a-project#scaffold-a-project
   cube:
-    image: cubejs/cube:v1.3.10
+    image: cubejs/cube:v1.3.54
     ports:
       - 4000:4000
       - 15432:15432
