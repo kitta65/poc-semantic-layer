@@ -4,3 +4,4 @@ cube/*
 !cube/model
 
 schema.py
+*.pyc
