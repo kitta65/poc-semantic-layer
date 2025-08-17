@@ -2,3 +2,5 @@
 
 cube/*
 !cube/model
+
+schema.py

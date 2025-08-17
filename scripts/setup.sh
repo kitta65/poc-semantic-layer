@@ -11,3 +11,5 @@ rm -rf .env
   echo "CUBEJS_DB_BQ_PROJECT_ID=$(gcloud config get project)"
   echo "CUBEJS_DB_BQ_CREDENTIALS=$(cat "${HOME}/.config/gcloud/application_default_credentials.json" | base64 | tr -d '\n')"
 } >> .env
+
+uv sync
