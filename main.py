@@ -1,18 +1,22 @@
-from sgqlc.endpoint.http import HTTPEndpoint
-from sgqlc.operation import Operation
-from schema import schema
+import asyncio
+from graphql_client import Client
+from graphql_client.custom_fields import (
+    EventsMembersFields,
+    ResultFields,
+)
+from graphql_client.custom_queries import Query
 
-def main():
-    op = Operation(schema.query_type)
-    schema.query_type
-    cube = op.cube
-    cube.events()
-    endpoint = HTTPEndpoint("http://localhost:4000/cubejs-api/graphql")
-    data = endpoint(op)
+CLIENT = Client(url="http://localhost:4000/cubejs-api/graphql")
 
-    print(data)
-
+async def main():
+    query = Query.cube().fields(
+        ResultFields.events().fields(
+            EventsMembersFields.count
+        )
+    )
+    response = await CLIENT.query(query, operation_name="my_first_query")
+    print(response)
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

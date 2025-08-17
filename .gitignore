@@ -3,5 +3,5 @@
 cube/*
 !cube/model
 
-schema.py
+graphql_client/
 *.pyc

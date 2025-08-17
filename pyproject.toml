@@ -5,6 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "ariadne-codegen>=0.14.0",
     "marimo[recommended]>=0.14.17",
-    "sgqlc>=16.5",
 ]
+
+[tool.ariadne-codegen]
+remote_schema_url = "http://localhost:4000/cubejs-api/graphql"
+enable_custom_operations = true
