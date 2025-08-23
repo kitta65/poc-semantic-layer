@@ -1,0 +1,42 @@
+cubes:
+  - name: users
+    sql_table: bigquery-public-data.thelook_ecommerce.users
+    data_source: default
+
+    joins: []
+
+    dimensions:
+      - name: id
+        sql: "{CUBE}.id"
+        primary_key: true
+        type: string
+
+      - name: email
+        sql: "{CUBE}.email"
+        type: string
+
+    measures:
+      - name: count
+        type: count
+
+      - name: count_male
+        type: count
+        filters:
+          - sql: "{CUBE}.gender = 'M'"
+
+      - name: count_female
+        type: count
+        filters:
+          - sql: "{CUBE}.gender = 'F'"
+
+      - name: ratio_male
+        type: number
+        sql: "{count_male} / {count}"
+
+      - name: ratio_female
+        type: number
+        sql: "{count_female} / {count}"
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started

@@ -41,10 +41,10 @@ async def _(
     client,
     pl,
 ):
-    _query = Query.cube().fields(
+    _query = Query.cube(limit=10).fields(
         ResultFields.events(order_by=EventsOrderByInput(count="desc")).fields(
-            EventsMembersFields.count,
             EventsMembersFields.city,
+            EventsMembersFields.count,
         )
     )
     data = await client.query(_query, operation_name="my_first_query")
