@@ -5,8 +5,8 @@ cubes:
 
     joins:
       - name: users
-        sql: "{users}.id = {orders}.user_id"
-        relationship: one_to_many
+        sql: "{orders}.user_id = {users}.id"
+        relationship: many_to_one
 
     dimensions:
       - name: order_id
@@ -37,9 +37,6 @@ cubes:
             interval: 1 year
             type: prior
       - name: ratio_count_yoy
-        # i don't know if `multi_stage: true` is required here or not.
-        # as far as i could know, `multi_stage: true` is used in this blog.
-        # https://cube.dev/blog/introducing-next-generation-data-modeling-engine
         multi_stage: true
         sql: "{count} / {count_prev_year}"
         type: number
