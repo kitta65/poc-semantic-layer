@@ -22,13 +22,27 @@ cubes:
         sql: "{CUBE}.created_at"
         type: time
 
-      - name: created_at__month
-        sql: "{created_at.month}"
-        type: time
-
     measures:
       - name: count
         type: count
+
+      # multi-stage calculations (prior date)
+      # https://cube.dev/docs/product/data-modeling/concepts/multi-stage-calculations#prior-date
+      - name: count_prev_year
+        multi_stage: true
+        sql: "{count}"
+        type: number
+        time_shift:
+          - time_dimension: created_at
+            interval: 1 year
+            type: prior
+      - name: ratio_count_yoy
+        # i don't know if `multi_stage: true` is required here or not.
+        # as far as i could know, `multi_stage: true` is used in this blog.
+        # https://cube.dev/blog/introducing-next-generation-data-modeling-engine
+        multi_stage: true
+        sql: "{count} / {count_prev_year}"
+        type: number
 
     pre_aggregations:
       # Pre-aggregation definitions go here.
