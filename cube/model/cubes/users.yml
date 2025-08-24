@@ -15,6 +15,20 @@ cubes:
         sql: "{CUBE}.email"
         type: string
 
+      - name: frist_name
+        sql: "{CUBE}.first_name"
+        type: string
+
+      - name: last_name
+        sql: "{CUBE}.last_name"
+        type: string
+
+      # proxy dimension (members of the same cube)
+      # https://cube.dev/docs/product/data-modeling/concepts/calculated-members#members-of-the-same-cube
+      - name: full_name
+        sql: "{full_name} || ' ' {last_name}"
+        type: string
+
     measures:
       - name: count
         type: count
@@ -29,10 +43,11 @@ cubes:
         filters:
           - sql: "{CUBE}.gender = 'F'"
 
+      # calculated measure
+      # https://cube.dev/docs/product/data-modeling/concepts/calculated-members#calculated-measures
       - name: ratio_male
         type: number
         sql: "{count_male} / {count}"
-
       - name: ratio_female
         type: number
         sql: "{count_female} / {count}"
