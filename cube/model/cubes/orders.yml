@@ -1,0 +1,35 @@
+cubes:
+  - name: orders
+    sql_table: bigquery-public-data.thelook_ecommerce.orders
+    data_source: default
+
+    joins:
+      - name: users
+        sql: "{users}.id = {orders}.user_id"
+        relationship: one_to_many
+
+    dimensions:
+      - name: order_id
+        sql: "{CUBE}.order_id"
+        primary_key: true
+        type: string
+
+      - name: user_id
+        sql: "{CUBE}.user_id"
+        type: string
+
+      - name: created_at
+        sql: "{CUBE}.created_at"
+        type: time
+
+      - name: created_at__month
+        sql: "{created_at.month}"
+        type: time
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started

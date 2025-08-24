@@ -15,7 +15,7 @@ cubes:
         sql: "{CUBE}.email"
         type: string
 
-      - name: frist_name
+      - name: first_name
         sql: "{CUBE}.first_name"
         type: string
 
@@ -26,8 +26,16 @@ cubes:
       # proxy dimension (members of the same cube)
       # https://cube.dev/docs/product/data-modeling/concepts/calculated-members#members-of-the-same-cube
       - name: full_name
-        sql: "{full_name} || ' ' {last_name}"
+        sql: "{first_name} || ' ' || {last_name}"
         type: string
+
+      # subquery dimension
+      # https://cube.dev/docs/product/data-modeling/concepts/calculated-members#subquery-dimensions
+      - name: count_order
+        # `ifnull({orders.count}, 0)` does not work here!
+        sql: "{orders.count}"
+        type: number
+        sub_query: true
 
     measures:
       - name: count
