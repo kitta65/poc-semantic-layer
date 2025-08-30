@@ -2,4 +2,4 @@
 set -euo pipefail
 cd "$(dirname "$0")"/..
 
-ariadne-codegen client
+uv run ariadne-codegen client

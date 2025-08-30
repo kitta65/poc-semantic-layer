@@ -24,13 +24,13 @@ cubes:
         type: string
 
       # proxy dimension (members of the same cube)
-      # https://cube.dev/docs/product/data-modeling/concepts/calculated-members#members-of-the-same-cube
+      # see https://cube.dev/docs/product/data-modeling/concepts/calculated-members#members-of-the-same-cube
       - name: full_name
         sql: "{first_name} || ' ' || {last_name}"
         type: string
 
       # subquery dimension
-      # https://cube.dev/docs/product/data-modeling/concepts/calculated-members#subquery-dimensions
+      # see https://cube.dev/docs/product/data-modeling/concepts/calculated-members#subquery-dimensions
       - name: count_order
         # `ifnull({orders.count}, 0)` does not work here!
         sql: "{orders.count}"
@@ -52,7 +52,7 @@ cubes:
           - sql: "{CUBE}.gender = 'F'"
 
       # calculated measure
-      # https://cube.dev/docs/product/data-modeling/concepts/calculated-members#calculated-measures
+      # see https://cube.dev/docs/product/data-modeling/concepts/calculated-members#calculated-measures
       - name: ratio_male
         type: number
         sql: "{count_male} / {count}"

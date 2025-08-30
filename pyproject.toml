@@ -7,6 +7,8 @@ requires-python = ">=3.13"
 dependencies = [
     "ariadne-codegen>=0.14.0",
     "marimo[recommended]>=0.14.17",
+    "psycopg2>=2.9.10",
+    "sqlalchemy>=2.0.43",
 ]
 
 [tool.ariadne-codegen]

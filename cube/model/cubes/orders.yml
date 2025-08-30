@@ -26,8 +26,12 @@ cubes:
       - name: count
         type: count
 
+      - name: count_user
+        type: count_distinct
+        sql: "{CUBE}.user_id"
+
       # multi-stage calculations (prior date)
-      # https://cube.dev/docs/product/data-modeling/concepts/multi-stage-calculations#prior-date
+      # see https://cube.dev/docs/product/data-modeling/concepts/multi-stage-calculations#prior-date
       - name: count_prev_year
         multi_stage: true
         sql: "{count}"
